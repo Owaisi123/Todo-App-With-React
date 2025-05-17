@@ -1,30 +1,33 @@
 import { useState } from "react";
 import { useTodo } from "../Context/TodoContext";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Todo = () => {
   const [name, setName] = useState("");
   const [task, setTask] = useState("");
   const { addTodo } = useTodo();
 
+  const navigate = useNavigate();
+
   const handleAdd = () => {
-    if (name.trim() !== "" && task.trim() !== "")  {
+    if (name.trim() !== "" && task.trim() !== "") {
       addTodo(name, task);
       setName("");
       setTask("");
     }
   };
 
-  const showBuuton = useNavigate()
   const handleShow = () => {
-    showBuuton('/show')
-  }
+    navigate("/show");
+  };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
-      <h2 className="text-3xl font-bold mb-6 text-blue-700">Todo Page</h2>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-10">
+      <div className="w-full max-w-md bg-white p-6 rounded-2xl shadow-lg space-y-4">
+        <h2 className="text-2xl md:text-3xl font-bold text-center text-blue-700">
+          Todo Page
+        </h2>
 
-      <div className="w-full max-w-md bg-white p-6 rounded-xl shadow-md space-y-4">
         <input
           type="text"
           placeholder="Enter your name"
@@ -50,7 +53,7 @@ const Todo = () => {
 
         <button
           onClick={handleShow}
-          className="block text-center text-blue-600 hover:underline mt-2"
+          className="w-full text-center text-blue-600 hover:underline"
         >
           Go to Show Page
         </button>
@@ -60,3 +63,4 @@ const Todo = () => {
 };
 
 export default Todo;
+
